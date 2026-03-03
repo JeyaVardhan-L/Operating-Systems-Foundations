@@ -5,11 +5,16 @@
 int main() {
     pid_t pid = fork();
 
-    if (pid > 0) {
+    if (pid == -1) {
+        printf("Fork failed\n");
+        return 1;
+    }
+
+    if (pid == 0) {
+        printf("Child Process\n");
+    } else {
         wait(NULL);
         printf("Parent after child finishes\n");
-    } else {
-        printf("Child Process\n");
     }
 
     return 0;
